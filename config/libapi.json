@@ -1,0 +1,927 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "",
+    "version": ""
+  },
+  "host": "127.0.0.1:6001",
+  "schemes": ["http", "https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/v1/lib/gettoken": {
+      "post": {
+        "operationId": "gettoken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/GetTokenReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GetTokenReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/add": {
+      "post": {
+        "operationId": "merchantadd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantAddReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/delete": {
+      "post": {
+        "operationId": "merchantdelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantDeleteReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantDeleteReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/get": {
+      "post": {
+        "operationId": "merchantget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantGetReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/search": {
+      "post": {
+        "operationId": "merchantsearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantSearchReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantSearchReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/update": {
+      "post": {
+        "operationId": "merchantupdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUpdateReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/add": {
+      "post": {
+        "operationId": "merchantuseradd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUserAddReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/delete": {
+      "post": {
+        "operationId": "merchantuserdelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserDeleteReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUserDeleteReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/get": {
+      "post": {
+        "operationId": "merchantuserget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUserGetReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/login": {
+      "post": {
+        "operationId": "merchantuserlogin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserLoginReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUserLoginReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/search": {
+      "post": {
+        "operationId": "merchantusersearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserSearchReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantSearchReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/merchant/user/update": {
+      "post": {
+        "operationId": "merchantuserupdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/MerchantUserReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MerchantUserUpdateReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    }
+  },
+  "definitions": {
+    "GetTokenReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "accesstoken": {
+          "type": "string"
+        },
+        "accessexpire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refreshafter": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "GetTokenReply",
+      "required": ["code", "msg", "accesstoken", "accessexpire", "refreshafter"]
+    },
+    "GetTokenReq": {
+      "type": "object",
+      "title": "GetTokenReq"
+    },
+    "Merchant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "Merchant",
+      "required": ["id", "name", "status", "createdat", "updatedat"]
+    },
+    "MerchantAddReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        }
+      },
+      "title": "MerchantAddReq",
+      "required": ["name", "status"]
+    },
+    "MerchantDeleteReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantDeleteReply",
+      "required": ["code", "msg", "id"]
+    },
+    "MerchantDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantDeleteReq",
+      "required": ["id"]
+    },
+    "MerchantGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantGetReq",
+      "required": ["id"]
+    },
+    "MerchantReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantReply",
+      "required": ["code", "msg", "id", "name", "status", "createdat", "updatedat"]
+    },
+    "MerchantSearchReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "merchants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Merchant"
+          }
+        },
+        "isend": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "lastval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantSearchReply",
+      "required": ["code", "msg", "merchants", "isend", "lastval"]
+    },
+    "MerchantSearchReq": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "pagesize": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "orderby": {
+          "type": "string",
+          "default": "id"
+        },
+        "ordertype": {
+          "type": "string",
+          "default": "desc"
+        }
+      },
+      "title": "MerchantSearchReq",
+      "required": ["keyword", "page", "status", "pagesize", "orderby", "ordertype"]
+    },
+    "MerchantUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        }
+      },
+      "title": "MerchantUpdateReq",
+      "required": ["id", "name", "status"]
+    },
+    "MerchantUser": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "mobliephone": {
+          "type": "string"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantUser",
+      "required": [
+        "id",
+        "nickname",
+        "email",
+        "username",
+        "password",
+        "telephone",
+        "mobliephone",
+        "merchantid",
+        "status",
+        "createdat",
+        "updatedat"
+      ]
+    },
+    "MerchantUserAddReq": {
+      "type": "object",
+      "properties": {
+        "nickname": {
+          "type": "string",
+          "default": "''"
+        },
+        "username": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string",
+          "default": "''"
+        },
+        "mobliephone": {
+          "type": "string",
+          "default": "''"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantUserAddReq",
+      "required": [
+        "nickname",
+        "username",
+        "email",
+        "password",
+        "telephone",
+        "mobliephone",
+        "merchantid"
+      ]
+    },
+    "MerchantUserDeleteReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantUserDeleteReply",
+      "required": ["code", "msg", "id"]
+    },
+    "MerchantUserDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantUserDeleteReq",
+      "required": ["id"]
+    },
+    "MerchantUserGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantUserGetReq",
+      "required": ["id"]
+    },
+    "MerchantUserLoginReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "mobliephone": {
+          "type": "string"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        },
+        "accesstoken": {
+          "type": "string"
+        },
+        "accessexpire": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "refreshafter": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantUserLoginReply",
+      "required": [
+        "code",
+        "msg",
+        "id",
+        "nickname",
+        "email",
+        "username",
+        "password",
+        "telephone",
+        "mobliephone",
+        "merchantid",
+        "status",
+        "createdat",
+        "updatedat",
+        "accesstoken",
+        "accessexpire",
+        "refreshafter"
+      ]
+    },
+    "MerchantUserLoginReq": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "type": {
+          "type": "integer",
+          "format": "int64",
+          "default": "0"
+        }
+      },
+      "title": "MerchantUserLoginReq",
+      "required": ["username", "password", "type"]
+    },
+    "MerchantUserReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "telephone": {
+          "type": "string"
+        },
+        "mobliephone": {
+          "type": "string"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "MerchantUserReply",
+      "required": [
+        "code",
+        "msg",
+        "id",
+        "nickname",
+        "email",
+        "username",
+        "password",
+        "telephone",
+        "mobliephone",
+        "merchantid",
+        "status",
+        "createdat",
+        "updatedat"
+      ]
+    },
+    "MerchantUserSearchReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "merchantusers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MerchantUser"
+          }
+        },
+        "isend": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "lastval": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantUserSearchReply",
+      "required": ["code", "msg", "merchantusers", "isend", "lastval"]
+    },
+    "MerchantUserSearchReq": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "pagesize": {
+          "type": "integer",
+          "format": "int64",
+          "default": "10"
+        },
+        "orderby": {
+          "type": "string",
+          "default": "id"
+        },
+        "ordertype": {
+          "type": "integer",
+          "format": "int64",
+          "default": "desc"
+        }
+      },
+      "title": "MerchantUserSearchReq",
+      "required": ["keyword", "status", "page", "pagesize", "orderby", "ordertype"]
+    },
+    "MerchantUserUpdateReq": {
+      "type": "object",
+      "properties": {
+        "nickname": {
+          "type": "string",
+          "default": "''"
+        },
+        "telephone": {
+          "type": "string",
+          "default": "''"
+        },
+        "mobliephone": {
+          "type": "string",
+          "default": "''"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "MerchantUserUpdateReq",
+      "required": ["nickname", "telephone", "mobliephone", "merchantid"]
+    },
+    "Reply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        }
+      },
+      "title": "Reply",
+      "required": ["code", "msg"]
+    }
+  },
+  "securityDefinitions": {
+    "apiKey": {
+      "type": "apiKey",
+      "description": "Enter JWT Bearer token **_only_**",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ]
+}

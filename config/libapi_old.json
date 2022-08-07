@@ -1,0 +1,291 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Ant Design Pro",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:6001/"
+    },
+    {
+      "url": "https://localhost:6001/"
+    }
+  ],
+  "paths": {
+    "/v1/lib/merchant/user/login": {
+      "post": {
+        "tags": ["api"],
+        "description": "后台用户登陆",
+        "operationId": "merchantUserLogin",
+        "requestBody": {
+          "description": "后台用户登录系统",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MerchantUserLoginParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantUserLogin"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-swagger-router-controller": "api"
+    },
+    "/v1/lib/merchant/user/get": {
+      "post": {
+        "tags": ["api"],
+        "description": "获取后台用户信息",
+        "operationId": "merchantGetUser",
+        "requestBody": {
+          "description": "后台用户登录系统",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MerchantGetUserParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantGetUser"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-swagger-router-controller": "api"
+    },
+    "/v1/lib/merchant/search": {
+      "post": {
+        "tags": ["merchantsearch"],
+        "description": "商户搜索",
+        "operationId": "merchantSearch",
+        "requestBody": {
+          "description": "商户搜索",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MerchantSearchParams"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MerchantSearch"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      },
+      "x-swagger-router-controller": "api"
+    }
+  },
+  "components": {
+    "schemas": {
+      "MerchantUserLoginParams": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "MerchantUserLogin": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "userid": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "MerchantGetUserParams": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          }
+        }
+      },
+      "MerchantGetUser": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "avatar": {
+                "type": "string"
+              },
+              "userid": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "MerchantSearchParams": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "type": "integer"
+          },
+          "lastval": {
+            "type": "integer"
+          },
+          "keyword": {
+            "type": "string"
+          },
+          "pagesize": {
+            "type": "integer"
+          },
+          "orderby": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer"
+          }
+        }
+      },
+      "MerchantSearch": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "msg": {
+            "type": "string"
+          },
+          "isend": {
+            "type": "string"
+          },
+          "lastval": {
+            "type": "string"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              },
+              "status": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "ErrorResponse": {
+        "required": ["errorCode"],
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "string",
+            "description": "业务约定的错误码"
+          },
+          "errorMessage": {
+            "type": "string",
+            "description": "业务上的错误信息"
+          },
+          "success": {
+            "type": "boolean",
+            "description": "业务上的请求是否成功"
+          }
+        }
+      }
+    }
+  }
+}
