@@ -72,18 +72,18 @@ const List: React.FC = () => {
     {
       disable: true,
       title: '状态',
-      dataIndex: 'state',
+      dataIndex: 'status',
       filters: true,
       onFilter: true,
       ellipsis: true,
       valueType: 'select',
       valueEnum: {
-        all: { text: '超长'.repeat(50) },
-        active: {
+        '': { text: '全部' },
+        1: {
           text: 'Active',
           status: 'Success',
         },
-        inactive: {
+        0: {
           text: 'Inactive',
           status: 'Error',
         },
@@ -142,7 +142,7 @@ const List: React.FC = () => {
         type: 'multiple',
       }}
       columnsState={{
-        persistenceKey: 'pro-table-singe-demos',
+        persistenceKey: 'merchantdemo',
         persistenceType: 'localStorage',
         onChange(value) {
           console.log('value: ', value);
@@ -170,7 +170,7 @@ const List: React.FC = () => {
         },
       }}
       pagination={{
-        pageSize: 5,
+        pageSize: 10,
         onChange: (page) => console.log(page),
       }}
       dateFormatter="string"
