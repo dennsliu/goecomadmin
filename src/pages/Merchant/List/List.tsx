@@ -4,8 +4,13 @@ import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
 import { Button, Select } from 'antd';
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 const List: React.FC = () => {
+  const [loading, setLoading] = useState(false);
+  const [pageSize, setPageSize] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
   const [currentRow, setCurrentRow] = useState<API.Merchant>();
   const [selectedRowsState, setSelectedRows] = useState<API.Merchant[]>([]);
   const [allRows, setAllRows] = useState<API.Merchant[]>([]);
@@ -20,12 +25,15 @@ const List: React.FC = () => {
       console.log('merchantSearch result code:');
       console.log(result.code);
       if (result.code == 200) {
-        let tmpAllRows = allRows;
+        let tmpAllRows = [];
         result.merchants.map((merchant) => {
           tmpAllRows.push(merchant);
         });
         setAllRows(tmpAllRows);
-        return result.merchants;
+        setCurrentPage(result.currentpage);
+        setTotalPage(result.totalpage);
+        setTotalCount(result.total);
+        //return result.merchants;
       }
     } catch (error) {}
   };
@@ -39,16 +47,41 @@ const List: React.FC = () => {
   };
   const { Option } = Select;
 
-  getMerchantList({
-    keyword: '',
-    status: 1,
-    orderby: 'id',
-    ordertype: 'desc',
-    page: 1,
-    pagesize: 10,
-    lastval: 0,
-  } as API.MerchantSearchReq);
-  const columns: ProColumns<GithubIssueItem>[] = [
+  useEffect(() => {
+    getMerchantList({
+      keyword: '',
+      status: 1,
+      lastid: 0,
+      ordertype: 'desc',
+      page: 1,
+      pagesize: 10,
+    } as API.MerchantSearchReq);
+  }, []);
+  const handlePageChange = (page) => {
+    console.log('handlePageChange:', page);
+    getMerchantList({
+      keyword: '',
+      status: 1,
+      lastid: 0,
+      ordertype: 'desc',
+      page: page,
+      pagesize: 10,
+    } as API.MerchantSearchReq);
+  };
+  const pageChange = (pagination: any, filters: any, sorter: any) => {
+    const tmpCurrentPage = pagination.current;
+    setCurrentPage(tmpCurrentPage);
+    getMerchantList({
+      keyword: '',
+      status: 1,
+      lastid: 0,
+      ordertype: 'desc',
+      page: tmpCurrentPage,
+      pagesize: 10,
+    } as API.MerchantSearchReq);
+    console.log('pageChange---');
+  };
+  const columns: ProColumns<API.Merchant>[] = [
     {
       dataIndex: 'index',
       valueType: 'indexBorder',
@@ -78,7 +111,6 @@ const List: React.FC = () => {
       ellipsis: true,
       valueType: 'select',
       valueEnum: {
-        '': { text: '全部' },
         1: {
           text: 'Active',
           status: 'Success',
@@ -96,13 +128,15 @@ const List: React.FC = () => {
       valueType: 'dateTime',
       sorter: true,
       hideInSearch: true,
+      editable: false,
     },
     {
-      updatedat: '创建时间',
+      updatedat: '更新时间',
       key: 'updatedat',
       dataIndex: 'updatedat',
       valueType: 'dateTime',
       sorter: true,
+      editable: false,
       hideInSearch: true,
     },
     {
@@ -150,7 +184,54 @@ const List: React.FC = () => {
       }}
       rowKey="id"
       search={{
-        labelWidth: 'auto',
+        labelWidth: 100,
+        span: 12,
+        optionRender: ({ searchText, resetText }, { form }, dom) => [
+          <Button
+            key="searchText"
+            type="primary"
+            onClick={() => {
+              //console.log(params);
+              //form?.submit();
+
+              form
+                .validateFields()
+                .then((fieldsValue) => {
+                  console.log(fieldsValue);
+                  let name = '';
+                  if (fieldsValue.name) {
+                    name = fieldsValue.name;
+                  }
+                  let status = 1;
+                  if (fieldsValue.status && fieldsValue.status == 0) {
+                    status = 0;
+                  }
+                  setCurrentPage(1);
+                  getMerchantList({
+                    keyword: name,
+                    status: status,
+                    lastid: 0,
+                    ordertype: 'desc',
+                    page: 1,
+                    pagesize: 10,
+                  } as API.MerchantSearchReq);
+                })
+                .catch((errorInfo) => {
+                  console.log(errorInfo);
+                });
+            }}
+          >
+            {searchText}
+          </Button>,
+          <Button
+            key="resetText"
+            onClick={() => {
+              form?.resetFields();
+            }}
+          >
+            {resetText}
+          </Button>,
+        ],
       }}
       options={{
         setting: {
@@ -169,12 +250,14 @@ const List: React.FC = () => {
           return values;
         },
       }}
+      onChange={pageChange}
       pagination={{
-        pageSize: 10,
-        onChange: (page) => console.log(page),
+        pageSize: pageSize,
+        total: totalCount,
       }}
       dateFormatter="string"
-      headerTitle="高级表格"
+      headerTitle="商户列表"
+      loading={loading}
       toolBarRender={() => [
         <Button
           key="button"

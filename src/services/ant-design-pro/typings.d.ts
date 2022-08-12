@@ -52,6 +52,9 @@ declare namespace API {
     merchants: Merchant[];
     isend: boolean;
     lastval: number;
+    total: number;
+    currentpage: number;
+    totalpage: number;
   };
 
   type MerchantSearchReq = {
@@ -59,7 +62,7 @@ declare namespace API {
     page: number;
     status: number;
     pagesize: number;
-    orderby: string;
+    lastid: number;
     ordertype: string;
   };
 
@@ -154,6 +157,9 @@ declare namespace API {
     merchantusers: MerchantUser[];
     isend: boolean;
     lastval: number;
+    total: number;
+    currentpage: number;
+    totalpage: number;
   };
 
   type MerchantUserSearchReq = {
@@ -161,8 +167,8 @@ declare namespace API {
     status: number;
     page: number;
     pagesize: number;
-    orderby: string;
-    ordertype: number;
+    lastid: number;
+    ordertype: string;
   };
 
   type MerchantUserUpdateReq = {
@@ -175,5 +181,9 @@ declare namespace API {
   type Reply = {
     code: number;
     msg: string;
+  };
+
+  type Total = {
+    total: number;
   };
 }

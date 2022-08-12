@@ -459,10 +459,31 @@
         "lastval": {
           "type": "integer",
           "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currentpage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalpage": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "MerchantSearchReply",
-      "required": ["code", "msg", "merchants", "isend", "lastval"]
+      "required": [
+        "code",
+        "msg",
+        "merchants",
+        "isend",
+        "lastval",
+        "total",
+        "currentpage",
+        "totalpage"
+      ]
     },
     "MerchantSearchReq": {
       "type": "object",
@@ -486,9 +507,10 @@
           "format": "int64",
           "default": "1"
         },
-        "orderby": {
-          "type": "string",
-          "default": "id"
+        "lastid": {
+          "type": "integer",
+          "format": "int64",
+          "default": "0"
         },
         "ordertype": {
           "type": "string",
@@ -496,7 +518,7 @@
         }
       },
       "title": "MerchantSearchReq",
-      "required": ["keyword", "page", "status", "pagesize", "orderby", "ordertype"]
+      "required": ["keyword", "page", "status", "pagesize", "lastid", "ordertype"]
     },
     "MerchantUpdateReq": {
       "type": "object",
@@ -833,10 +855,31 @@
         "lastval": {
           "type": "integer",
           "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currentpage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalpage": {
+          "type": "integer",
+          "format": "int64"
         }
       },
       "title": "MerchantUserSearchReply",
-      "required": ["code", "msg", "merchantusers", "isend", "lastval"]
+      "required": [
+        "code",
+        "msg",
+        "merchantusers",
+        "isend",
+        "lastval",
+        "total",
+        "currentpage",
+        "totalpage"
+      ]
     },
     "MerchantUserSearchReq": {
       "type": "object",
@@ -860,18 +903,18 @@
           "format": "int64",
           "default": "10"
         },
-        "orderby": {
-          "type": "string",
-          "default": "id"
-        },
-        "ordertype": {
+        "lastid": {
           "type": "integer",
           "format": "int64",
+          "default": "0"
+        },
+        "ordertype": {
+          "type": "string",
           "default": "desc"
         }
       },
       "title": "MerchantUserSearchReq",
-      "required": ["keyword", "status", "page", "pagesize", "orderby", "ordertype"]
+      "required": ["keyword", "status", "page", "pagesize", "lastid", "ordertype"]
     },
     "MerchantUserUpdateReq": {
       "type": "object",
@@ -909,6 +952,17 @@
       },
       "title": "Reply",
       "required": ["code", "msg"]
+    },
+    "Total": {
+      "type": "object",
+      "properties": {
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "Total",
+      "required": ["total"]
     }
   },
   "securityDefinitions": {
