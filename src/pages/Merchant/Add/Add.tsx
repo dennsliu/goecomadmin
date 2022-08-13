@@ -62,7 +62,9 @@ const Add: React.FC = () => {
       <ProForm.Group>
         <ProFormSelect
           width="xs"
-          required
+          required={true}
+          mode="single"
+          placeholder={'Please choose merchant status'}
           options={[
             {
               value: 1,

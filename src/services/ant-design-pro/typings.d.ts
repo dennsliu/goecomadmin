@@ -25,11 +25,11 @@ declare namespace API {
   type MerchantDeleteReply = {
     code: number;
     msg: string;
-    id: string;
+    id: number;
   };
 
   type MerchantDeleteReq = {
-    id: string;
+    id: number;
   };
 
   type MerchantGetReq = {
@@ -99,11 +99,11 @@ declare namespace API {
   type MerchantUserDeleteReply = {
     code: number;
     msg: string;
-    id: string;
+    id: number;
   };
 
   type MerchantUserDeleteReq = {
-    id: string;
+    id: number;
   };
 
   type MerchantUserGetReq = {

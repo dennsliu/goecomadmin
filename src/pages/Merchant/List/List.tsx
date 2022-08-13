@@ -1,4 +1,4 @@
-import { merchantsearch } from '@/services/ant-design-pro/libApi';
+import { merchantdelete, merchantsearch, merchantupdate } from '@/services/ant-design-pro/libApi';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable, TableDropdown } from '@ant-design/pro-components';
@@ -57,16 +57,9 @@ const List: React.FC = () => {
       pagesize: 10,
     } as API.MerchantSearchReq);
   }, []);
-  const handlePageChange = (page) => {
-    console.log('handlePageChange:', page);
-    getMerchantList({
-      keyword: '',
-      status: 1,
-      lastid: 0,
-      ordertype: 'desc',
-      page: page,
-      pagesize: 10,
-    } as API.MerchantSearchReq);
+  const onLineSave = (key) => {
+    console.log(key);
+    console.log('------onLineSave------');
   };
   const pageChange = (pagination: any, filters: any, sorter: any) => {
     const tmpCurrentPage = pagination.current;
@@ -77,27 +70,30 @@ const List: React.FC = () => {
       lastid: 0,
       ordertype: 'desc',
       page: tmpCurrentPage,
-      pagesize: 10,
+      pagesize: pageSize,
     } as API.MerchantSearchReq);
     console.log('pageChange---');
   };
   const columns: ProColumns<API.Merchant>[] = [
     {
-      dataIndex: 'index',
-      valueType: 'indexBorder',
+      title: 'ID',
+      dataIndex: 'id',
       width: 48,
+      sorter: true,
+      hideInSearch: true,
+      editable: false,
     },
     {
-      name: 'Name',
+      title: 'Name',
       dataIndex: 'name',
       copyable: true,
       ellipsis: true,
-      tip: 'name过长会自动收缩',
+      tip: '商户名过长会自动收缩',
       formItemProps: {
         rules: [
           {
             required: true,
-            message: '此项为必填项',
+            message: '商户名不能为空',
           },
         ],
       },
@@ -110,6 +106,7 @@ const List: React.FC = () => {
       onFilter: true,
       ellipsis: true,
       valueType: 'select',
+      initialValue: 1,
       valueEnum: {
         1: {
           text: 'Active',
@@ -122,7 +119,7 @@ const List: React.FC = () => {
       },
     },
     {
-      createdat: '创建时间',
+      title: '创建时间',
       key: 'createdat',
       dataIndex: 'createdat',
       valueType: 'dateTime',
@@ -131,7 +128,7 @@ const List: React.FC = () => {
       editable: false,
     },
     {
-      updatedat: '更新时间',
+      title: '更新时间',
       key: 'updatedat',
       dataIndex: 'updatedat',
       valueType: 'dateTime',
@@ -152,9 +149,6 @@ const List: React.FC = () => {
         >
           编辑
         </a>,
-        <a href={record.url} target="_blank" rel="noopener noreferrer" key="view">
-          查看
-        </a>,
         <TableDropdown
           key="actionGroup"
           onSelect={() => action?.reload()}
@@ -170,10 +164,42 @@ const List: React.FC = () => {
     <ProTable<API.Merchant>
       columns={columns}
       actionRef={actionRef}
-      cardBordered
       dataSource={allRows}
       editable={{
-        type: 'multiple',
+        type: 'single',
+        onSave: function (key, record, originrow) {
+          console.log(record);
+          console.log(record.status);
+          let status = Number(record.status);
+          merchantupdate({
+            id: record.id,
+            name: record.name,
+            status: status,
+          } as API.MerchantUpdateReq).then((res) => {
+            console.log(res);
+            getMerchantList({
+              keyword: '',
+              status: 1,
+              lastid: 0,
+              ordertype: 'desc',
+              page: currentPage,
+              pagesize: pageSize,
+            } as API.MerchantSearchReq);
+          });
+        },
+        onDelete: function (key, record) {
+          console.log(record);
+          merchantdelete({ id: record.id } as API.MerchantDeleteReq).then((res) => {
+            getMerchantList({
+              keyword: '',
+              status: 1,
+              lastid: 0,
+              ordertype: 'desc',
+              page: currentPage,
+              pagesize: pageSize,
+            } as API.MerchantSearchReq);
+          });
+        },
       }}
       columnsState={{
         persistenceKey: 'merchantdemo',
@@ -191,9 +217,6 @@ const List: React.FC = () => {
             key="searchText"
             type="primary"
             onClick={() => {
-              //console.log(params);
-              //form?.submit();
-
               form
                 .validateFields()
                 .then((fieldsValue) => {
@@ -232,23 +255,6 @@ const List: React.FC = () => {
             {resetText}
           </Button>,
         ],
-      }}
-      options={{
-        setting: {
-          listsHeight: 400,
-        },
-      }}
-      form={{
-        // 由于配置了 transform，提交的参与与定义的不同这里需要转化一下
-        syncToUrl: (values, type) => {
-          if (type === 'get') {
-            return {
-              ...values,
-              created_at: [values.startTime, values.endTime],
-            };
-          }
-          return values;
-        },
       }}
       onChange={pageChange}
       pagination={{
