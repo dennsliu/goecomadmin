@@ -172,10 +172,12 @@ declare namespace API {
   };
 
   type MerchantUserUpdateReq = {
+    id: number;
     nickname: string;
     telephone: string;
     mobliephone: string;
     merchantid: number;
+    status: number;
   };
 
   type Reply = {

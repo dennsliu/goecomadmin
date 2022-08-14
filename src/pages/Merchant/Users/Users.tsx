@@ -102,18 +102,89 @@ const Users: React.FC = () => {
       sorter: true,
       hideInSearch: true,
       editable: false,
+      onFilter: false,
     },
     {
       title: 'Nickname',
       dataIndex: 'nickname',
+      onFilter: false,
       copyable: true,
       ellipsis: true,
+      hideInSearch: true,
       tip: '商户名过长会自动收缩',
       formItemProps: {
         rules: [
           {
             required: true,
             message: '呢称不能为空',
+          },
+        ],
+      },
+    },
+    {
+      title: 'Username',
+      dataIndex: 'username',
+      copyable: true,
+      ellipsis: true,
+      editable: false,
+      tip: '用户名过长会自动收缩',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '用户名不能为空',
+          },
+        ],
+      },
+    },
+    {
+      title: 'Email',
+      dataIndex: 'email',
+      editable: false,
+      onFilter: false,
+      copyable: true,
+      ellipsis: true,
+      hideInSearch: true,
+      tip: '邮箱过长会自动收缩',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '邮箱不能为空',
+          },
+        ],
+      },
+    },
+    {
+      title: '固话',
+      dataIndex: 'telephone',
+      onFilter: false,
+      copyable: true,
+      ellipsis: true,
+      hideInSearch: true,
+      tip: '固话过长会自动收缩',
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '固话不能为空',
+          },
+        ],
+      },
+    },
+    {
+      title: '手机号',
+      dataIndex: 'mobilephone',
+      copyable: true,
+      ellipsis: true,
+      tip: '手机号过长会自动收缩',
+      onFilter: false,
+      hideInSearch: true,
+      formItemProps: {
+        rules: [
+          {
+            required: true,
+            message: '手机号不能为空',
           },
         ],
       },
@@ -186,7 +257,10 @@ const Users: React.FC = () => {
             merchantuserupdate({
               id: record.id,
               nickname: record.nickname,
-              mobliephone: mobliephone,
+              mobliephone: record.mobliephone,
+              telephone: record.telephone,
+              status: record.status,
+              merchantid: record.merchantid,
             } as API.MerchantUserUpdateReq).then((res) => {
               console.log(res);
               getMerchantUserList({
@@ -214,7 +288,7 @@ const Users: React.FC = () => {
           },
         }}
         columnsState={{
-          persistenceKey: 'merchantdemo',
+          persistenceKey: 'merchantuserdemo',
           persistenceType: 'localStorage',
           onChange(value) {
             console.log('value: ', value);
@@ -233,9 +307,9 @@ const Users: React.FC = () => {
                   .validateFields()
                   .then((fieldsValue) => {
                     console.log(fieldsValue);
-                    let name = '';
-                    if (fieldsValue.name) {
-                      name = fieldsValue.name;
+                    let username = '';
+                    if (fieldsValue.username) {
+                      username = fieldsValue.username;
                     }
                     let status = 1;
                     if (fieldsValue.status && fieldsValue.status == 0) {
@@ -243,7 +317,7 @@ const Users: React.FC = () => {
                     }
                     setCurrentPage(1);
                     getMerchantUserList({
-                      keyword: name,
+                      keyword: username,
                       status: status,
                       lastid: 0,
                       ordertype: 'desc',
@@ -287,7 +361,7 @@ const Users: React.FC = () => {
               });
             }}
           >
-            添加商户
+            添加商户管理员
           </Button>,
         ]}
       />
