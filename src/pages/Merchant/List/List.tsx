@@ -1,10 +1,40 @@
 import { merchantdelete, merchantsearch, merchantupdate } from '@/services/ant-design-pro/libApi';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
-import { ProTable, TableDropdown } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
-import { Button, Select } from 'antd';
+import { Button, ConfigProvider, Select } from 'antd';
+import caESIntl from 'antd/lib/locale/ca_ES';
+import enGBIntl from 'antd/lib/locale/en_GB';
+import enUSIntl from 'antd/lib/locale/en_US';
+import esESIntl from 'antd/lib/locale/es_ES';
+import frFRIntl from 'antd/lib/locale/fr_FR';
+import itITIntl from 'antd/lib/locale/it_IT';
+import jaJPIntl from 'antd/lib/locale/ja_JP';
+import msMYIntl from 'antd/lib/locale/ms_MY';
+import ptBRIntl from 'antd/lib/locale/pt_BR';
+import ruRUIntl from 'antd/lib/locale/ru_RU';
+import srRSIntl from 'antd/lib/locale/sr_RS';
+import viVNIntl from 'antd/lib/locale/vi_VN';
+import zhCNIntl from 'antd/lib/locale/zh_CN';
+import zhTWIntl from 'antd/lib/locale/zh_TW';
 import React, { useEffect, useRef, useState } from 'react';
+const intlMap = {
+  zhCNIntl,
+  enUSIntl,
+  enGBIntl,
+  viVNIntl,
+  itITIntl,
+  jaJPIntl,
+  esESIntl,
+  caESIntl,
+  ruRUIntl,
+  srRSIntl,
+  msMYIntl,
+  zhTWIntl,
+  frFRIntl,
+  ptBRIntl,
+};
 const List: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [pageSize, setPageSize] = useState(10);
@@ -14,6 +44,7 @@ const List: React.FC = () => {
   const [currentRow, setCurrentRow] = useState<API.Merchant>();
   const [selectedRowsState, setSelectedRows] = useState<API.Merchant[]>([]);
   const [allRows, setAllRows] = useState<API.Merchant[]>([]);
+  const [intl, setIntl] = useState('zhCNIntl');
   const actionRef = useRef<ActionType>();
   const getMerchantList = async (values: API.MerchantSearchReq) => {
     try {
@@ -57,10 +88,7 @@ const List: React.FC = () => {
       pagesize: 10,
     } as API.MerchantSearchReq);
   }, []);
-  const onLineSave = (key) => {
-    console.log(key);
-    console.log('------onLineSave------');
-  };
+
   const pageChange = (pagination: any, filters: any, sorter: any) => {
     const tmpCurrentPage = pagination.current;
     setCurrentPage(tmpCurrentPage);
@@ -99,7 +127,6 @@ const List: React.FC = () => {
       },
     },
     {
-      disable: true,
       title: '状态',
       dataIndex: 'status',
       filters: true,
@@ -149,136 +176,130 @@ const List: React.FC = () => {
         >
           编辑
         </a>,
-        <TableDropdown
-          key="actionGroup"
-          onSelect={() => action?.reload()}
-          menus={[
-            { key: 'copy', name: '复制' },
-            { key: 'delete', name: '删除' },
-          ]}
-        />,
       ],
     },
   ];
   return (
-    <ProTable<API.Merchant>
-      columns={columns}
-      actionRef={actionRef}
-      dataSource={allRows}
-      editable={{
-        type: 'single',
-        onSave: function (key, record, originrow) {
-          console.log(record);
-          console.log(record.status);
-          let status = Number(record.status);
-          merchantupdate({
-            id: record.id,
-            name: record.name,
-            status: status,
-          } as API.MerchantUpdateReq).then((res) => {
-            console.log(res);
-            getMerchantList({
-              keyword: '',
-              status: 1,
-              lastid: 0,
-              ordertype: 'desc',
-              page: currentPage,
-              pagesize: pageSize,
-            } as API.MerchantSearchReq);
-          });
-        },
-        onDelete: function (key, record) {
-          console.log(record);
-          merchantdelete({ id: record.id } as API.MerchantDeleteReq).then((res) => {
-            getMerchantList({
-              keyword: '',
-              status: 1,
-              lastid: 0,
-              ordertype: 'desc',
-              page: currentPage,
-              pagesize: pageSize,
-            } as API.MerchantSearchReq);
-          });
-        },
-      }}
-      columnsState={{
-        persistenceKey: 'merchantdemo',
-        persistenceType: 'localStorage',
-        onChange(value) {
-          console.log('value: ', value);
-        },
-      }}
-      rowKey="id"
-      search={{
-        labelWidth: 100,
-        span: 12,
-        optionRender: ({ searchText, resetText }, { form }, dom) => [
+    <ConfigProvider locale={intlMap[intl]}>
+      <ProTable<API.Merchant>
+        columns={columns}
+        actionRef={actionRef}
+        dataSource={allRows}
+        editable={{
+          type: 'single',
+          onSave: function (key, record, originrow) {
+            console.log(record);
+            console.log(record.status);
+            let status = Number(record.status);
+            merchantupdate({
+              id: record.id,
+              name: record.name,
+              status: status,
+            } as API.MerchantUpdateReq).then((res) => {
+              console.log(res);
+              getMerchantList({
+                keyword: '',
+                status: 1,
+                lastid: 0,
+                ordertype: 'desc',
+                page: currentPage,
+                pagesize: pageSize,
+              } as API.MerchantSearchReq);
+            });
+          },
+          onDelete: function (key, record) {
+            console.log(record);
+            merchantdelete({ id: record.id } as API.MerchantDeleteReq).then((res) => {
+              getMerchantList({
+                keyword: '',
+                status: 1,
+                lastid: 0,
+                ordertype: 'desc',
+                page: currentPage,
+                pagesize: pageSize,
+              } as API.MerchantSearchReq);
+            });
+          },
+        }}
+        columnsState={{
+          persistenceKey: 'merchantdemo',
+          persistenceType: 'localStorage',
+          onChange(value) {
+            console.log('value: ', value);
+          },
+        }}
+        rowKey="id"
+        search={{
+          labelWidth: 100,
+          span: 12,
+          optionRender: ({ searchText, resetText }, { form }, dom) => [
+            <Button
+              key="searchText"
+              type="primary"
+              onClick={() => {
+                form
+                  .validateFields()
+                  .then((fieldsValue) => {
+                    console.log(fieldsValue);
+                    let name = '';
+                    if (fieldsValue.name) {
+                      name = fieldsValue.name;
+                    }
+                    let status = 1;
+                    if (fieldsValue.status && fieldsValue.status == 0) {
+                      status = 0;
+                    }
+                    setCurrentPage(1);
+                    getMerchantList({
+                      keyword: name,
+                      status: status,
+                      lastid: 0,
+                      ordertype: 'desc',
+                      page: 1,
+                      pagesize: 10,
+                    } as API.MerchantSearchReq);
+                  })
+                  .catch((errorInfo) => {
+                    console.log(errorInfo);
+                  });
+              }}
+            >
+              {searchText}
+            </Button>,
+            <Button
+              key="resetText"
+              onClick={() => {
+                form?.resetFields();
+              }}
+            >
+              {resetText}
+            </Button>,
+          ],
+        }}
+        onChange={pageChange}
+        pagination={{
+          pageSize: pageSize,
+          total: totalCount,
+        }}
+        dateFormatter="string"
+        headerTitle="商户列表"
+        loading={loading}
+        toolBarRender={() => [
           <Button
-            key="searchText"
+            key="button"
+            icon={<PlusOutlined />}
             type="primary"
             onClick={() => {
-              form
-                .validateFields()
-                .then((fieldsValue) => {
-                  console.log(fieldsValue);
-                  let name = '';
-                  if (fieldsValue.name) {
-                    name = fieldsValue.name;
-                  }
-                  let status = 1;
-                  if (fieldsValue.status && fieldsValue.status == 0) {
-                    status = 0;
-                  }
-                  setCurrentPage(1);
-                  getMerchantList({
-                    keyword: name,
-                    status: status,
-                    lastid: 0,
-                    ordertype: 'desc',
-                    page: 1,
-                    pagesize: 10,
-                  } as API.MerchantSearchReq);
-                })
-                .catch((errorInfo) => {
-                  console.log(errorInfo);
-                });
+              history.replace({
+                pathname: '/merchant/add',
+              });
             }}
           >
-            {searchText}
+            添加商户
           </Button>,
-          <Button
-            key="resetText"
-            onClick={() => {
-              form?.resetFields();
-            }}
-          >
-            {resetText}
-          </Button>,
-        ],
-      }}
-      onChange={pageChange}
-      pagination={{
-        pageSize: pageSize,
-        total: totalCount,
-      }}
-      dateFormatter="string"
-      headerTitle="商户列表"
-      loading={loading}
-      toolBarRender={() => [
-        <Button
-          key="button"
-          icon={<PlusOutlined />}
-          type="primary"
-          onClick={() => {
-            history.replace({
-              pathname: '/merchant/add',
-            });
-          }}
-        >
-          添加商户
-        </Button>,
-      ]}
-    />
+        ]}
+      />
+    </ConfigProvider>
   );
 };
 

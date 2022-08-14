@@ -49,4 +49,10 @@ export default {
   'menu.editor.flow': 'Flow Editor',
   'menu.editor.mind': 'Mind Editor',
   'menu.editor.koni': 'Koni Editor',
+
+  'menu.merchantandstore': 'Merchant and Store',
+  'menu.merchantandstore.adduser': 'Add Merchant User',
+  'menu.merchantandstore.users': 'Merchant Users',
+  'menu.merchantandstore.list': 'Merchant List',
+  'menu.merchantandstore.addmerchant': 'Add Merchant',
 };

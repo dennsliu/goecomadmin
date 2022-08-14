@@ -2,7 +2,7 @@ import { merchantadd } from '@/services/ant-design-pro/libApi';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProForm, ProFormSelect, ProFormText } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
-import { Button, message } from 'antd';
+import { Button, message, PageHeader } from 'antd';
 import { useRef } from 'react';
 const Add: React.FC = () => {
   const handleSubmit = async (values: API.MerchantAddReq) => {
@@ -48,6 +48,7 @@ const Add: React.FC = () => {
         },
       }}
     >
+      <PageHeader className="site-page-header" onBack={() => null} title="添加商户" />
       <ProForm.Group>
         <ProFormText
           width="md"
@@ -65,6 +66,7 @@ const Add: React.FC = () => {
           required={true}
           mode="single"
           placeholder={'Please choose merchant status'}
+          initialValue={1}
           options={[
             {
               value: 1,
