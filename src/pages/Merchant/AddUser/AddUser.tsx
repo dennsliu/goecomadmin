@@ -56,7 +56,7 @@ const AddUser: React.FC = () => {
   };
   const formRef = useRef<
     ProFormInstance<{
-      name: string;
+      username: string;
       status?: number;
     }>
   >();

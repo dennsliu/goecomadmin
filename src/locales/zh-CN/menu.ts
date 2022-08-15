@@ -55,4 +55,8 @@ export default {
   'menu.merchantandstore.users': '商户管理用户列表',
   'menu.merchantandstore.list': '商户列表',
   'menu.merchantandstore.addmerchant': '商户添加',
+  'menu.merchantandstore.stores': '店铺列表',
+  'menu.merchantandstore.addstore': '店铺添加',
+  'menu.merchantandstore.addlanguage': '系统语言添加',
+  'menu.merchantandstore.languages': '系统语言',
 };

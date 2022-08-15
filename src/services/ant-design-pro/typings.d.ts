@@ -9,6 +9,80 @@ declare namespace API {
 
   type GetTokenReq = true;
 
+  type Languages = {
+    id: number;
+    name: string;
+    code: string;
+    image: string;
+    directory: string;
+    order: number;
+    createdat: string;
+    updatedat: string;
+  };
+
+  type LanguagesAddReq = {
+    name: string;
+    languagecode: string;
+    image: string;
+    directory: string;
+    order: number;
+  };
+
+  type LanguagesDeleteReply = {
+    code: number;
+    msg: string;
+    id: number;
+  };
+
+  type LanguagesDeleteReq = {
+    id: number;
+  };
+
+  type LanguagesGetReq = {
+    id: number;
+  };
+
+  type LanguagesReply = {
+    code: number;
+    msg: string;
+    id: number;
+    name: string;
+    languagecode: string;
+    image: string;
+    directory: string;
+    order: number;
+    createdat: string;
+    updatedat: string;
+  };
+
+  type LanguagesSearchReply = {
+    code: number;
+    msg: string;
+    languages: Languages[];
+    isend: boolean;
+    lastval: number;
+    total: number;
+    currentpage: number;
+    totalpage: number;
+  };
+
+  type LanguagesSearchReq = {
+    keyword: string;
+    page: number;
+    pagesize: number;
+    lastid: number;
+    ordertype: string;
+  };
+
+  type LanguagesUpdateReq = {
+    id: number;
+    name: string;
+    languagecode: string;
+    image: string;
+    directory: string;
+    order: number;
+  };
+
   type Merchant = {
     id: number;
     name: string;
@@ -183,6 +257,83 @@ declare namespace API {
   type Reply = {
     code: number;
     msg: string;
+  };
+
+  type Store = {
+    id: number;
+    merchantid: number;
+    order: number;
+    status: number;
+    createdat: string;
+    updatedat: string;
+  };
+
+  type StoreAddReq = {
+    merchantid: number;
+    order: number;
+    status: number;
+    storeLaguage: StoreLaguage[];
+  };
+
+  type StoreDeleteReply = {
+    code: number;
+    msg: string;
+    id: number;
+  };
+
+  type StoreDeleteReq = {
+    id: number;
+  };
+
+  type StoreGetReq = {
+    id: number;
+  };
+
+  type StoreLaguage = {
+    id: number;
+    name: string;
+    keyword: string;
+    description: string;
+    laguageid: number;
+    createdat: string;
+    updatedat: string;
+  };
+
+  type StoreReply = {
+    code: number;
+    msg: string;
+    id: number;
+    merchantid: number;
+    order: number;
+    createdat: string;
+    updatedat: string;
+  };
+
+  type StoreSearchReply = {
+    code: number;
+    msg: string;
+    stores: Store[];
+    isend: boolean;
+    lastval: number;
+    total: number;
+    currentpage: number;
+    totalpage: number;
+  };
+
+  type StoreSearchReq = {
+    keyword: string;
+    page: number;
+    status: number;
+    pagesize: number;
+    lastid: number;
+    ordertype: string;
+  };
+
+  type StoreUpdateReq = {
+    id: number;
+    order: number;
+    status: number;
+    storeLaguage: StoreLaguage[];
   };
 
   type Total = {

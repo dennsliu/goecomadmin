@@ -33,6 +33,126 @@
         "tags": ["lib-api"]
       }
     },
+    "/v1/lib/languages/add": {
+      "post": {
+        "operationId": "languagesadd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguagesAddReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/languages/delete": {
+      "post": {
+        "operationId": "languagesdelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesDeleteReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguagesDeleteReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/languages/get": {
+      "post": {
+        "operationId": "languagesget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguagesGetReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/languages/search": {
+      "post": {
+        "operationId": "languagessearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesSearchReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguagesSearchReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/languages/update": {
+      "post": {
+        "operationId": "languagesupdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/LanguagesReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LanguagesUpdateReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
     "/v1/lib/merchant/add": {
       "post": {
         "operationId": "merchantadd",
@@ -296,6 +416,126 @@
         ],
         "tags": ["lib-api"]
       }
+    },
+    "/v1/lib/store/add": {
+      "post": {
+        "operationId": "storeadd",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/StoreReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoreAddReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/store/delete": {
+      "post": {
+        "operationId": "storedelete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/StoreDeleteReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoreDeleteReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/store/get": {
+      "post": {
+        "operationId": "storeget",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/StoreReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoreGetReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/store/search": {
+      "post": {
+        "operationId": "storesearch",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/StoreSearchReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoreSearchReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
+    },
+    "/v1/lib/store/update": {
+      "post": {
+        "operationId": "storeupdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/StoreReply"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/StoreUpdateReq"
+            }
+          }
+        ],
+        "tags": ["lib-api"]
+      }
     }
   },
   "definitions": {
@@ -327,6 +567,259 @@
     "GetTokenReq": {
       "type": "object",
       "title": "GetTokenReq"
+    },
+    "Languages": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "Languages",
+      "required": ["id", "name", "code", "image", "directory", "order", "createdat", "updatedat"]
+    },
+    "LanguagesAddReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "languagecode": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesAddReq",
+      "required": ["name", "languagecode", "image", "directory", "order"]
+    },
+    "LanguagesDeleteReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesDeleteReply",
+      "required": ["code", "msg", "id"]
+    },
+    "LanguagesDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesDeleteReq",
+      "required": ["id"]
+    },
+    "LanguagesGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesGetReq",
+      "required": ["id"]
+    },
+    "LanguagesReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "languagecode": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "LanguagesReply",
+      "required": [
+        "code",
+        "msg",
+        "id",
+        "name",
+        "languagecode",
+        "image",
+        "directory",
+        "order",
+        "createdat",
+        "updatedat"
+      ]
+    },
+    "LanguagesSearchReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "languages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Languages"
+          }
+        },
+        "isend": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "lastval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currentpage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalpage": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesSearchReply",
+      "required": [
+        "code",
+        "msg",
+        "languages",
+        "isend",
+        "lastval",
+        "total",
+        "currentpage",
+        "totalpage"
+      ]
+    },
+    "LanguagesSearchReq": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "pagesize": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "lastid": {
+          "type": "integer",
+          "format": "int64",
+          "default": "0"
+        },
+        "ordertype": {
+          "type": "string",
+          "default": "desc"
+        }
+      },
+      "title": "LanguagesSearchReq",
+      "required": ["keyword", "page", "pagesize", "lastid", "ordertype"]
+    },
+    "LanguagesUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "name": {
+          "type": "string"
+        },
+        "languagecode": {
+          "type": "string"
+        },
+        "image": {
+          "type": "string"
+        },
+        "directory": {
+          "type": "string"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "LanguagesUpdateReq",
+      "required": ["id", "name", "languagecode", "image", "directory", "order"]
     },
     "Merchant": {
       "type": "object",
@@ -965,6 +1458,269 @@
       },
       "title": "Reply",
       "required": ["code", "msg"]
+    },
+    "Store": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "Store",
+      "required": ["id", "merchantid", "order", "status", "createdat", "updatedat"]
+    },
+    "StoreAddReq": {
+      "type": "object",
+      "properties": {
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "storeLaguage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StoreLaguage"
+          }
+        }
+      },
+      "title": "StoreAddReq",
+      "required": ["merchantid", "order", "status", "storeLaguage"]
+    },
+    "StoreDeleteReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StoreDeleteReply",
+      "required": ["code", "msg", "id"]
+    },
+    "StoreDeleteReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StoreDeleteReq",
+      "required": ["id"]
+    },
+    "StoreGetReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StoreGetReq",
+      "required": ["id"]
+    },
+    "StoreLaguage": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "default": "''"
+        },
+        "name": {
+          "type": "string",
+          "default": "''"
+        },
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "description": {
+          "type": "string",
+          "default": "''"
+        },
+        "laguageid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "StoreLaguage",
+      "required": ["id", "name", "keyword", "description", "laguageid", "createdat", "updatedat"]
+    },
+    "StoreReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "merchantid": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "createdat": {
+          "type": "string"
+        },
+        "updatedat": {
+          "type": "string"
+        }
+      },
+      "title": "StoreReply",
+      "required": ["code", "msg", "id", "merchantid", "order", "createdat", "updatedat"]
+    },
+    "StoreSearchReply": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "msg": {
+          "type": "string"
+        },
+        "stores": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Store"
+          }
+        },
+        "isend": {
+          "type": "boolean",
+          "format": "boolean"
+        },
+        "lastval": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "total": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "currentpage": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "totalpage": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StoreSearchReply",
+      "required": ["code", "msg", "stores", "isend", "lastval", "total", "currentpage", "totalpage"]
+    },
+    "StoreSearchReq": {
+      "type": "object",
+      "properties": {
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "pagesize": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "lastid": {
+          "type": "integer",
+          "format": "int64",
+          "default": "0"
+        },
+        "ordertype": {
+          "type": "string",
+          "default": "desc"
+        }
+      },
+      "title": "StoreSearchReq",
+      "required": ["keyword", "page", "status", "pagesize", "lastid", "ordertype"]
+    },
+    "StoreUpdateReq": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "order": {
+          "type": "integer",
+          "format": "int64",
+          "default": "0"
+        },
+        "status": {
+          "type": "integer",
+          "format": "int64",
+          "default": "1"
+        },
+        "storeLaguage": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StoreLaguage"
+          }
+        }
+      },
+      "title": "StoreUpdateReq",
+      "required": ["id", "order", "status", "storeLaguage"]
     },
     "Total": {
       "type": "object",

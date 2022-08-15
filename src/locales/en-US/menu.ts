@@ -55,4 +55,8 @@ export default {
   'menu.merchantandstore.users': 'Merchant Users',
   'menu.merchantandstore.list': 'Merchant List',
   'menu.merchantandstore.addmerchant': 'Add Merchant',
+  'menu.merchantandstore.stores': 'Stores',
+  'menu.merchantandstore.addstore': 'Add Store',
+  'menu.merchantandstore.addlanguage': 'Add language',
+  'menu.merchantandstore.languages': 'Languages',
 };
