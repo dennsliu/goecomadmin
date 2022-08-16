@@ -155,6 +155,7 @@ declare namespace API {
     telephone: string;
     mobliephone: string;
     merchantid: number;
+    merchantname: string;
     status: number;
     createdat: string;
     updatedat: string;
@@ -220,6 +221,7 @@ declare namespace API {
     telephone: string;
     mobliephone: string;
     merchantid: number;
+    merchantname: string;
     status: number;
     createdat: string;
     updatedat: string;
@@ -262,6 +264,7 @@ declare namespace API {
   type Store = {
     id: number;
     merchantid: number;
+    merchantname: string;
     order: number;
     status: number;
     createdat: string;
@@ -311,6 +314,7 @@ declare namespace API {
     msg: string;
     id: number;
     merchantid: number;
+    merchantname: string;
     order: number;
     createdat: string;
     updatedat: string;

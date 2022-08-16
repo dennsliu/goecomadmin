@@ -111,6 +111,14 @@ const List: React.FC = () => {
       editable: false,
     },
     {
+      title: '商户',
+      dataIndex: 'merchantname',
+      width: 48,
+      sorter: false,
+      hideInSearch: true,
+      editable: false,
+    },
+    {
       title: '状态',
       dataIndex: 'status',
       filters: true,

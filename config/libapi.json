@@ -1063,6 +1063,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "merchantname": {
+          "type": "string",
+          "default": "''"
+        },
         "status": {
           "type": "integer",
           "format": "int64"
@@ -1084,6 +1088,7 @@
         "telephone",
         "mobliephone",
         "merchantid",
+        "merchantname",
         "status",
         "createdat",
         "updatedat"
@@ -1301,6 +1306,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "merchantname": {
+          "type": "string",
+          "default": "''"
+        },
         "status": {
           "type": "integer",
           "format": "int64"
@@ -1324,6 +1333,7 @@
         "telephone",
         "mobliephone",
         "merchantid",
+        "merchantname",
         "status",
         "createdat",
         "updatedat"
@@ -1470,6 +1480,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "merchantname": {
+          "type": "string",
+          "default": "''"
+        },
         "order": {
           "type": "integer",
           "format": "int64"
@@ -1486,7 +1500,7 @@
         }
       },
       "title": "Store",
-      "required": ["id", "merchantid", "order", "status", "createdat", "updatedat"]
+      "required": ["id", "merchantid", "merchantname", "order", "status", "createdat", "updatedat"]
     },
     "StoreAddLaguageReq": {
       "type": "object",
@@ -1629,6 +1643,10 @@
           "type": "integer",
           "format": "int64"
         },
+        "merchantname": {
+          "type": "string",
+          "default": "''"
+        },
         "order": {
           "type": "integer",
           "format": "int64"
@@ -1641,7 +1659,16 @@
         }
       },
       "title": "StoreReply",
-      "required": ["code", "msg", "id", "merchantid", "order", "createdat", "updatedat"]
+      "required": [
+        "code",
+        "msg",
+        "id",
+        "merchantid",
+        "merchantname",
+        "order",
+        "createdat",
+        "updatedat"
+      ]
     },
     "StoreSearchReply": {
       "type": "object",
