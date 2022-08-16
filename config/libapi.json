@@ -1488,6 +1488,29 @@
       "title": "Store",
       "required": ["id", "merchantid", "order", "status", "createdat", "updatedat"]
     },
+    "StoreAddLaguageReq": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "default": "''"
+        },
+        "keyword": {
+          "type": "string",
+          "default": "''"
+        },
+        "description": {
+          "type": "string",
+          "default": "''"
+        },
+        "laguageid": {
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "title": "StoreAddLaguageReq",
+      "required": ["name", "keyword", "description", "laguageid"]
+    },
     "StoreAddReq": {
       "type": "object",
       "properties": {
@@ -1507,7 +1530,7 @@
         "storeLaguage": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/StoreLaguage"
+            "$ref": "#/definitions/StoreAddLaguageReq"
           }
         }
       },

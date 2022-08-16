@@ -1,4 +1,4 @@
-import { languagessearch, merchantadd } from '@/services/ant-design-pro/libApi';
+import { languagessearch, merchantsearch, storeadd } from '@/services/ant-design-pro/libApi';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { ProForm, ProFormDependency, ProFormSelect, ProFormText } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
@@ -6,6 +6,8 @@ import { Button, message, PageHeader } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 const AddStore: React.FC = () => {
   const [languages, setLanguages] = useState<[]>([]);
+  const [languageObject, setLanguageObject] = useState<[]>([]);
+  const [merchants, setMerchants] = useState<[]>([]);
   useEffect(() => {
     getLanguageList({
       keyword: '',
@@ -14,31 +16,74 @@ const AddStore: React.FC = () => {
       page: 1,
       pagesize: 100,
     } as API.LanguagesSearchReq);
+    getMerchantList({
+      keyword: '',
+      status: 1,
+      lastid: 0,
+      ordertype: 'desc',
+      page: 1,
+      pagesize: 100,
+    } as API.MerchantSearchReq);
   }, []);
   const getLanguageList = async (values: API.LanguagesSearchReq) => {
     try {
       const result = await languagessearch({ ...values });
       if (result.code == 200) {
         let tmpAllRows = [];
+        let tmpLanguageObject = {};
         result.languages.map((language) => {
           tmpAllRows.push({ value: language.id, label: language.name });
+          tmpLanguageObject[language.id] = language.name;
         });
         setLanguages(tmpAllRows);
+        setLanguageObject(tmpLanguageObject);
       }
     } catch (error) {}
   };
-  const handleSubmit = async (values: API.MerchantAddReq) => {
+  const getMerchantList = async (values: API.MerchantSearchReq) => {
+    try {
+      const result = await merchantsearch({ ...values });
+      if (result.code == 200) {
+        let tmpAllRows = [];
+        result.merchants.map((merchant) => {
+          tmpAllRows.push({ value: merchant.id, label: merchant.name });
+        });
+        setMerchants(tmpAllRows);
+      }
+    } catch (error) {}
+  };
+  const handleSubmit = async () => {
     try {
       formRef.current?.validateFields();
       console.log('-----handleSubmit------');
+      const languages = formRef?.current?.getFieldValue('languages');
+      console.log('--------languages--------');
+      console.log(languages);
+      var tmpStoreLaguageArray = [];
+
+      languages.map((language) => {
+        console.log(language);
+        console.log(formRef?.current?.getFieldValue('name[' + language + ']'));
+        const tmpLanguageData = {
+          name: formRef?.current?.getFieldValue('name[' + language + ']'),
+          keyword: formRef?.current?.getFieldValue('keyword[' + language + ']'),
+          description: formRef?.current?.getFieldValue('description[' + language + ']'),
+          laguageid: language,
+        };
+        console.log(tmpLanguageData);
+        tmpStoreLaguageArray[language] = tmpLanguageData;
+      });
       let addData = {
-        name: formRef?.current?.getFieldValue('name'),
+        merchantid: formRef?.current?.getFieldValue('merchantid'),
         status: formRef?.current?.getFieldValue('status'),
-      } as API.MerchantAddReq;
-      const result = await merchantadd(addData);
+        order: Number(formRef?.current?.getFieldValue('order')),
+        storeLaguage: tmpStoreLaguageArray,
+      } as API.StoreAddReq;
+      console.log(addData);
+      const result = await storeadd(addData);
       message.success('Added successfully');
       history.replace({
-        pathname: '/merchant/list',
+        pathname: '/merchant/stores',
       });
       return;
       // 登录
@@ -84,30 +129,49 @@ const AddStore: React.FC = () => {
           rules={[{ required: true, message: '请选择语言' }]}
         />
       </ProForm.Group>
-
       <ProFormDependency name={['languages']}>
         {({ languages }) => {
-          console.log(languages);
           if (languages.length > 0) {
             return (
               <div>
-                {for(l=0;l<languages.length;l++) {
+                {languages.map((language) => (
                   <div>
-                    <h2>{languages[l]}</h2>
+                    <h2>[{languageObject[language]}]</h2>
                     <ProForm.Group>
                       <ProFormText
                         width="md"
-                        name="name"
+                        name={'name[' + language + ']'}
                         required
                         label="店铺名"
                         tooltip="最长为 24 位"
-                        placeholder="请输入商户名"
-                        rules={[{ required: true, message: '请输入商户名' }]}
+                        placeholder="请输入店铺名"
+                        rules={[{ required: true, message: '请输入店铺名' }]}
+                      />
+                    </ProForm.Group>
+                    <ProForm.Group>
+                      <ProFormText
+                        width="md"
+                        name={'keyword[' + language + ']'}
+                        required
+                        label="关键词"
+                        tooltip="最长为 24 位"
+                        placeholder="请输入关键词"
+                        rules={[{ required: true, message: '请输入关键词' }]}
+                      />
+                    </ProForm.Group>
+                    <ProForm.Group>
+                      <ProFormText
+                        width="md"
+                        name={'description[' + language + ']'}
+                        required
+                        label="简述"
+                        tooltip="最长为 24 位"
+                        placeholder="请输入简述"
+                        rules={[{ required: true, message: '请输入简述' }]}
                       />
                     </ProForm.Group>
                   </div>
-                }
-              }
+                ))}
               </div>
             );
           } else {
@@ -115,16 +179,15 @@ const AddStore: React.FC = () => {
           }
         }}
       </ProFormDependency>
-
       <ProForm.Group>
         <ProFormText
           width="md"
-          name="name"
+          name="order"
           required
-          label="商户名"
+          label="排序"
           tooltip="最长为 24 位"
-          placeholder="请输入商户名"
-          rules={[{ required: true, message: '请输入商户名' }]}
+          placeholder="请输入排序"
+          rules={[{ required: true, message: '请输入排序' }]}
         />
       </ProForm.Group>
       <ProForm.Group>
@@ -145,7 +208,20 @@ const AddStore: React.FC = () => {
             },
           ]}
           name="status"
-          label="Status"
+          label="状态"
+          rules={[{ required: true, message: '请选择状态' }]}
+        />
+      </ProForm.Group>
+      <ProForm.Group>
+        <ProFormSelect
+          width="xs"
+          required={true}
+          mode="single"
+          placeholder={'Please choose merchant'}
+          initialValue={1}
+          options={merchants}
+          name="merchantid"
+          label="Merchant"
           rules={[{ required: true, message: '请选择状态' }]}
         />
       </ProForm.Group>

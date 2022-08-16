@@ -1,4 +1,4 @@
-import { merchantdelete, merchantsearch, merchantupdate } from '@/services/ant-design-pro/libApi';
+import { storesearch } from '@/services/ant-design-pro/libApi';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumns } from '@ant-design/pro-components';
 import { ProTable } from '@ant-design/pro-components';
@@ -46,25 +46,24 @@ const List: React.FC = () => {
   const [allRows, setAllRows] = useState<API.Merchant[]>([]);
   const [intl, setIntl] = useState('zhCNIntl');
   const actionRef = useRef<ActionType>();
-  const getMerchantList = async (values: API.MerchantSearchReq) => {
+  const getStoreList = async (values: API.StoreSearchReq) => {
     try {
       console.log(values);
-      console.log('--------getMerchantList------');
-      const result = await merchantsearch({ ...values });
-      console.log('merchantSearch result:');
+      console.log('--------getStoreList------');
+      const result = await storesearch({ ...values });
+      console.log('storesearch result:');
       console.log(result);
-      console.log('merchantSearch result code:');
+      console.log('storesearch result code:');
       console.log(result.code);
       if (result.code == 200) {
         let tmpAllRows = [];
-        result.merchants.map((merchant) => {
-          tmpAllRows.push(merchant);
+        result.stores.map((store) => {
+          tmpAllRows.push(store);
         });
         setAllRows(tmpAllRows);
         setCurrentPage(result.currentpage);
         setTotalPage(result.totalpage);
         setTotalCount(result.total);
-        //return result.merchants;
       }
     } catch (error) {}
   };
@@ -79,30 +78,30 @@ const List: React.FC = () => {
   const { Option } = Select;
 
   useEffect(() => {
-    getMerchantList({
+    getStoreList({
       keyword: '',
       status: 1,
       lastid: 0,
       ordertype: 'desc',
       page: 1,
       pagesize: 10,
-    } as API.MerchantSearchReq);
+    } as API.StoreSearchReq);
   }, []);
 
   const pageChange = (pagination: any, filters: any, sorter: any) => {
     const tmpCurrentPage = pagination.current;
     setCurrentPage(tmpCurrentPage);
-    getMerchantList({
+    getStoreList({
       keyword: '',
       status: 1,
       lastid: 0,
       ordertype: 'desc',
       page: tmpCurrentPage,
       pagesize: pageSize,
-    } as API.MerchantSearchReq);
+    } as API.StoreSearchReq);
     console.log('pageChange---');
   };
-  const columns: ProColumns<API.Merchant>[] = [
+  const columns: ProColumns<API.Store>[] = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -110,21 +109,6 @@ const List: React.FC = () => {
       sorter: true,
       hideInSearch: true,
       editable: false,
-    },
-    {
-      title: 'Name',
-      dataIndex: 'name',
-      copyable: true,
-      ellipsis: true,
-      tip: '商户名过长会自动收缩',
-      formItemProps: {
-        rules: [
-          {
-            required: true,
-            message: '商户名不能为空',
-          },
-        ],
-      },
     },
     {
       title: '状态',
@@ -181,48 +165,12 @@ const List: React.FC = () => {
   ];
   return (
     <ConfigProvider locale={intlMap[intl]}>
-      <ProTable<API.Merchant>
+      <ProTable<API.Store>
         columns={columns}
         actionRef={actionRef}
         dataSource={allRows}
-        editable={{
-          type: 'single',
-          onSave: function (key, record, originrow) {
-            console.log(record);
-            console.log(record.status);
-            let status = Number(record.status);
-            merchantupdate({
-              id: record.id,
-              name: record.name,
-              status: status,
-            } as API.MerchantUpdateReq).then((res) => {
-              console.log(res);
-              getMerchantList({
-                keyword: '',
-                status: 1,
-                lastid: 0,
-                ordertype: 'desc',
-                page: currentPage,
-                pagesize: pageSize,
-              } as API.MerchantSearchReq);
-            });
-          },
-          onDelete: function (key, record) {
-            console.log(record);
-            merchantdelete({ id: record.id } as API.MerchantDeleteReq).then((res) => {
-              getMerchantList({
-                keyword: '',
-                status: 1,
-                lastid: 0,
-                ordertype: 'desc',
-                page: currentPage,
-                pagesize: pageSize,
-              } as API.MerchantSearchReq);
-            });
-          },
-        }}
         columnsState={{
-          persistenceKey: 'merchantdemo',
+          persistenceKey: 'storedemo',
           persistenceType: 'localStorage',
           onChange(value) {
             console.log('value: ', value);
@@ -250,14 +198,14 @@ const List: React.FC = () => {
                       status = 0;
                     }
                     setCurrentPage(1);
-                    getMerchantList({
-                      keyword: name,
+                    getStoreList({
+                      keyword: '',
                       status: status,
                       lastid: 0,
                       ordertype: 'desc',
                       page: 1,
                       pagesize: 10,
-                    } as API.MerchantSearchReq);
+                    } as API.StoreSearchReq);
                   })
                   .catch((errorInfo) => {
                     console.log(errorInfo);
@@ -282,7 +230,7 @@ const List: React.FC = () => {
           total: totalCount,
         }}
         dateFormatter="string"
-        headerTitle="商户列表"
+        headerTitle="店铺列表"
         loading={loading}
         toolBarRender={() => [
           <Button
@@ -291,11 +239,11 @@ const List: React.FC = () => {
             type="primary"
             onClick={() => {
               history.replace({
-                pathname: '/merchant/add',
+                pathname: '/merchant/addstore',
               });
             }}
           >
-            添加商户
+            添加店铺
           </Button>,
         ]}
       />

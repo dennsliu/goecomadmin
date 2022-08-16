@@ -268,11 +268,18 @@ declare namespace API {
     updatedat: string;
   };
 
+  type StoreAddLaguageReq = {
+    name: string;
+    keyword: string;
+    description: string;
+    laguageid: number;
+  };
+
   type StoreAddReq = {
     merchantid: number;
     order: number;
     status: number;
-    storeLaguage: StoreLaguage[];
+    storeLaguage: StoreAddLaguageReq[];
   };
 
   type StoreDeleteReply = {
