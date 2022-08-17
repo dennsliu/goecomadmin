@@ -112,7 +112,7 @@ const List: React.FC = () => {
       editable: false,
     },
     {
-      title: 'Name',
+      title: '商户名',
       dataIndex: 'name',
       copyable: true,
       ellipsis: true,

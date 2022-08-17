@@ -68,6 +68,13 @@
         component: './Merchant/AddUser/AddUser',
       },
       {
+        name: 'updateuser',
+        icon: 'table',
+        path: '/merchant/updateuser',
+        component: './Merchant/UpdateUser/UpdateUser',
+        hideInMenu: 'true',
+      },
+      {
         name: 'users',
         icon: 'table',
         path: '/merchant/users',

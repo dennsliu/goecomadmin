@@ -4,9 +4,9 @@ import { ProForm, ProFormSelect, ProFormText } from '@ant-design/pro-components'
 import { history } from '@umijs/max';
 import { Button, message, PageHeader } from 'antd';
 import { useEffect, useRef, useState } from 'react';
-import styles from './AddUser.less';
+import styles from './UpdateUser.less';
 
-const AddUser: React.FC = () => {
+const UPdateUser: React.FC = () => {
   const [merchants, setMerchants] = useState<[]>([]);
   useEffect(() => {
     getMerchantList({
@@ -81,7 +81,7 @@ const AddUser: React.FC = () => {
           },
         }}
       >
-        <PageHeader className="site-page-header" onBack={() => null} title="添加商户管理员" />
+        <PageHeader className="site-page-header" onBack={() => null} title="修改商户管理员" />
         <ProForm.Group>
           <ProFormText
             width="md"
@@ -166,4 +166,4 @@ const AddUser: React.FC = () => {
   );
 };
 
-export default AddUser;
+export default UPdateUser;

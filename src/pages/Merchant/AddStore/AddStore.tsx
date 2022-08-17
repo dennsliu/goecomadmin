@@ -221,8 +221,8 @@ const AddStore: React.FC = () => {
           initialValue={1}
           options={merchants}
           name="merchantid"
-          label="Merchant"
-          rules={[{ required: true, message: '请选择状态' }]}
+          label="商户"
+          rules={[{ required: true, message: '请选择商户' }]}
         />
       </ProForm.Group>
     </ProForm>

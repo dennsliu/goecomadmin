@@ -79,19 +79,19 @@ const Users: React.FC = () => {
       ordertype: 'desc',
       page: 1,
       pagesize: 10,
-    } as API.MerchantSearchReq);
+    } as API.MerchantUserSearchReq);
   }, []);
   const pageChange = (pagination: any, filters: any, sorter: any) => {
     const tmpCurrentPage = pagination.current;
     setCurrentPage(tmpCurrentPage);
-    getMerchantList({
+    getMerchantUserList({
       keyword: '',
       status: 1,
       lastid: 0,
       ordertype: 'desc',
       page: tmpCurrentPage,
       pagesize: pageSize,
-    } as API.MerchantSearchReq);
+    } as API.MerchantUserSearchReq);
     console.log('pageChange---');
   };
   const columns: ProColumns<API.MerchantUser>[] = [
@@ -105,13 +105,13 @@ const Users: React.FC = () => {
       onFilter: false,
     },
     {
-      title: 'Nickname',
+      title: '呢称',
       dataIndex: 'nickname',
       onFilter: false,
       copyable: true,
       ellipsis: true,
       hideInSearch: true,
-      tip: '商户名过长会自动收缩',
+      tip: '呢称过长会自动收缩',
       formItemProps: {
         rules: [
           {
@@ -122,7 +122,7 @@ const Users: React.FC = () => {
       },
     },
     {
-      title: 'Username',
+      title: '用户名',
       dataIndex: 'username',
       copyable: true,
       ellipsis: true,
@@ -138,7 +138,7 @@ const Users: React.FC = () => {
       },
     },
     {
-      title: 'Email',
+      title: '邮箱',
       dataIndex: 'email',
       editable: false,
       onFilter: false,
@@ -154,6 +154,15 @@ const Users: React.FC = () => {
           },
         ],
       },
+    },
+    {
+      title: '商户',
+      dataIndex: 'merchantname',
+      editable: false,
+      onFilter: false,
+      copyable: true,
+      ellipsis: true,
+      hideInSearch: true,
     },
     {
       title: '固话',
@@ -232,12 +241,31 @@ const Users: React.FC = () => {
       key: 'option',
       render: (text, record, _, action) => [
         <a
-          key="editable"
+          key="updateuser"
           onClick={() => {
-            action?.startEditable?.(record.id);
+            history.replace({
+              pathname: '/merchant/updateuser?id=' + record.id,
+            });
           }}
         >
           编辑
+        </a>,
+        <a
+          key="updateuser"
+          onClick={() => {
+            merchantuserdelete({ id: record.id } as API.MerchantUserDeleteReq).then((res) => {
+              getMerchantUserList({
+                keyword: '',
+                status: 1,
+                lastid: 0,
+                ordertype: 'desc',
+                page: currentPage,
+                pagesize: pageSize,
+              } as API.MerchantUserSearchReq);
+            });
+          }}
+        >
+          删除
         </a>,
       ],
     },
@@ -357,7 +385,7 @@ const Users: React.FC = () => {
             type="primary"
             onClick={() => {
               history.replace({
-                pathname: '/merchant/add',
+                pathname: '/merchant/adduser',
               });
             }}
           >
