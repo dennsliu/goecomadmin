@@ -1,6 +1,6 @@
 import { languagesadd } from '@/services/ant-design-pro/libApi';
 import type { ProFormInstance } from '@ant-design/pro-components';
-import { ProForm, ProFormText } from '@ant-design/pro-components';
+import { ProForm, ProFormDigit, ProFormText } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
 import { Button, message, PageHeader } from 'antd';
 import { useRef } from 'react';
@@ -97,14 +97,15 @@ const AddLanguage: React.FC = () => {
         />
       </ProForm.Group>
       <ProForm.Group>
-        <ProFormText
+        <ProFormDigit
           width="md"
           name="order"
-          required
           label="排序"
           tooltip="最长为 24 位"
           placeholder="请输入排序"
-          rules={[{ required: true, message: '请输入排序' }]}
+          initialValue={0}
+          min={0}
+          rules={[{ message: '请输入排序' }]}
         />
       </ProForm.Group>
     </ProForm>

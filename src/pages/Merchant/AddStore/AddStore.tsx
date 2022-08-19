@@ -1,6 +1,12 @@
 import { languagessearch, merchantsearch, storeadd } from '@/services/ant-design-pro/libApi';
 import type { ProFormInstance } from '@ant-design/pro-components';
-import { ProForm, ProFormDependency, ProFormSelect, ProFormText } from '@ant-design/pro-components';
+import {
+  ProForm,
+  ProFormDependency,
+  ProFormDigit,
+  ProFormSelect,
+  ProFormText,
+} from '@ant-design/pro-components';
 import { history } from '@umijs/max';
 import { Button, message, PageHeader } from 'antd';
 import { useEffect, useRef, useState } from 'react';
@@ -49,6 +55,7 @@ const AddStore: React.FC = () => {
           tmpAllRows.push({ value: merchant.id, label: merchant.name });
         });
         setMerchants(tmpAllRows);
+        formRef.setFieldsValue({ merchantid: tmpAllRows[0].value });
       }
     } catch (error) {}
   };
@@ -93,6 +100,7 @@ const AddStore: React.FC = () => {
     ProFormInstance<{
       name: string;
       status?: number;
+      merchantid?: number;
     }>
   >();
   return (
@@ -180,17 +188,6 @@ const AddStore: React.FC = () => {
         }}
       </ProFormDependency>
       <ProForm.Group>
-        <ProFormText
-          width="md"
-          name="order"
-          required
-          label="排序"
-          tooltip="最长为 24 位"
-          placeholder="请输入排序"
-          rules={[{ required: true, message: '请输入排序' }]}
-        />
-      </ProForm.Group>
-      <ProForm.Group>
         <ProFormSelect
           width="xs"
           required={true}
@@ -223,6 +220,18 @@ const AddStore: React.FC = () => {
           name="merchantid"
           label="商户"
           rules={[{ required: true, message: '请选择商户' }]}
+        />
+      </ProForm.Group>
+      <ProForm.Group>
+        <ProFormDigit
+          width="md"
+          name="order"
+          label="排序"
+          tooltip="最长为 24 位"
+          placeholder="请输入排序"
+          initialValue={0}
+          rules={[{ message: '请输入排序' }]}
+          min={0}
         />
       </ProForm.Group>
     </ProForm>

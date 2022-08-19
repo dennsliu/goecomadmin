@@ -166,6 +166,7 @@ const Languages: React.FC = () => {
       ellipsis: true,
       tip: '排序过长会自动收缩',
       hideInSearch: true,
+      valueType: 'digit',
       formItemProps: {
         rules: [
           {
