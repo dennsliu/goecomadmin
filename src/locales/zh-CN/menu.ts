@@ -53,6 +53,7 @@ export default {
   'menu.merchantandstore': '商户店铺管理',
   'menu.merchantandstore.adduser': '添加商户管理用户',
   'menu.merchantandstore.users': '商户管理用户列表',
+  'menu.merchantandstore.updateuser': '更新商户管理用户',
   'menu.merchantandstore.list': '商户列表',
   'menu.merchantandstore.addmerchant': '商户添加',
   'menu.merchantandstore.stores': '店铺列表',

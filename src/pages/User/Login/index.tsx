@@ -1,5 +1,6 @@
 import Footer from '@/components/Footer';
 import { merchantuserlogin } from '@/services/ant-design-pro/libApi';
+import moment from 'moment';
 //import { getFakeCaptcha } from '@/services/ant-design-pro/login';
 import {
   AlipayCircleOutlined,
@@ -80,6 +81,7 @@ const Login: React.FC = () => {
           accesstoken: result.accesstoken,
           accessexpire: result.accessexpire,
           refreshafter: result.refreshafter,
+          tokenexpiredate: moment(parseInt(result.accessexpire)).format('YYYY-MM-DD HH:mm:ss'),
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         await setInitialState((s) => ({

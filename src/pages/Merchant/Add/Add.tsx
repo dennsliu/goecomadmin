@@ -55,9 +55,9 @@ const Add: React.FC = () => {
           name="name"
           required
           label="商户名"
-          tooltip="最长为 24 位"
+          tooltip="最长为 100 位"
           placeholder="请输入商户名"
-          rules={[{ required: true, message: '请输入商户名' }]}
+          rules={[{ required: true, message: '请输入商户名,最长度为100个字符', max: 100 }]}
         />
       </ProForm.Group>
       <ProForm.Group>

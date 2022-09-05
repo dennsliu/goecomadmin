@@ -6,7 +6,6 @@ import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 /**
@@ -39,6 +38,11 @@ export async function getInitialState(): Promise<{
     let userString = localStorage.getItem('currentUser');
     if (userString) {
       currentUser = JSON.parse(userString);
+      const nowDate = parseInt((new Date().getTime() / 1000).toString());
+      if (nowDate > parseInt(currentUser.refreshafter)) {
+        localStorage.removeItem('currentUser');
+        history.push(loginPath);
+      }
     } else {
       history.push(loginPath);
     }

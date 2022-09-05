@@ -1,6 +1,6 @@
 import { merchantsearch, merchantuseradd } from '@/services/ant-design-pro/libApi';
 import type { ProFormInstance } from '@ant-design/pro-components';
-import { ProForm, ProFormSelect, ProFormText } from '@ant-design/pro-components';
+import { ProForm, ProFormDigit, ProFormSelect, ProFormText } from '@ant-design/pro-components';
 import { history } from '@umijs/max';
 import { Button, message, PageHeader } from 'antd';
 import { useEffect, useRef, useState } from 'react';
@@ -41,8 +41,8 @@ const AddUser: React.FC = () => {
         username: formRef?.current?.getFieldValue('username'),
         email: formRef?.current?.getFieldValue('email'),
         password: formRef?.current?.getFieldValue('password'),
-        telephone: formRef?.current?.getFieldValue('telephone'),
-        mobliephone: formRef?.current?.getFieldValue('mobliephone'),
+        telephone: '' + formRef?.current?.getFieldValue('telephone'),
+        mobliephone: '' + formRef?.current?.getFieldValue('mobliephone'),
         merchantid: formRef?.current?.getFieldValue('merchantid'),
       } as API.MerchantUserAddReq;
       const result = await merchantuseradd(addData);
@@ -88,9 +88,9 @@ const AddUser: React.FC = () => {
             name="nickname"
             required
             label="昵称"
-            tooltip="最长为 24 位"
+            tooltip="最长为 100 个字符"
             placeholder="请输入昵称"
-            rules={[{ required: true, message: '请输入昵称' }]}
+            rules={[{ required: true, message: '请输入昵称,最长度为100个字符', max: 100 }]}
           />
         </ProForm.Group>
         <ProForm.Group>
@@ -99,9 +99,9 @@ const AddUser: React.FC = () => {
             name="username"
             required
             label="用户名"
-            tooltip="最长为 24 位"
+            tooltip="最长为 100 个字符"
             placeholder="请输入用户名"
-            rules={[{ required: true, message: '请输入用户名' }]}
+            rules={[{ required: true, message: '请输入用户名,最长度为100个字符', max: 100 }]}
           />
         </ProForm.Group>
         <ProForm.Group>
@@ -110,9 +110,9 @@ const AddUser: React.FC = () => {
             name="email"
             required
             label="邮箱"
-            tooltip="最长为 24 位"
+            tooltip="最长为 100 个字符"
             placeholder="请输入邮箱"
-            rules={[{ required: true, message: '请输入邮箱' }]}
+            rules={[{ required: true, message: '请输入邮箱,最长度为100个字符', max: 100 }]}
           />
         </ProForm.Group>
         <ProForm.Group>
@@ -121,31 +121,29 @@ const AddUser: React.FC = () => {
             name="password"
             required
             label="密码"
-            tooltip="最长为 24 位"
+            tooltip="最长为 11 个字符"
             placeholder="请输入密码"
-            rules={[{ required: true, message: '请输入密码' }]}
+            rules={[{ required: true, message: '请输入密码,最长度为11个字符' }]}
           />
         </ProForm.Group>
         <ProForm.Group>
-          <ProFormText
+          <ProFormDigit
             width="md"
             name="telephone"
-            required
             label="固话"
-            tooltip="最长为 24 位"
+            tooltip="最长为 100 个字符"
             placeholder="请输入固话"
-            rules={[{ required: true, message: '请输入固话' }]}
+            rules={[{ required: false, message: '请输入固话' }]}
           />
         </ProForm.Group>
         <ProForm.Group>
-          <ProFormText
+          <ProFormDigit
             width="md"
             name="mobliephone"
-            required
             label="手机号"
-            tooltip="最长为 24 位"
+            tooltip="最长为 100 个字符"
             placeholder="请输入手机号"
-            rules={[{ required: true, message: '请输入手机号' }]}
+            rules={[{ required: false, message: '请输入手机号,最长度为100个字符' }]}
           />
         </ProForm.Group>
         <ProForm.Group>
@@ -153,7 +151,7 @@ const AddUser: React.FC = () => {
             width="xs"
             required={true}
             mode="single"
-            placeholder={'Please choose merchant'}
+            placeholder={'请选择商户'}
             initialValue={1}
             options={merchants}
             name="merchantid"

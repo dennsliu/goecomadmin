@@ -138,7 +138,8 @@ const Languages: React.FC = () => {
         rules: [
           {
             required: true,
-            message: '编码不能为空',
+            message: '编码不能为空,而且不能长于10个字符',
+            max: 10,
           },
         ],
       },

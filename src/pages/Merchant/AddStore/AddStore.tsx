@@ -151,9 +151,11 @@ const AddStore: React.FC = () => {
                         name={'name[' + language + ']'}
                         required
                         label="店铺名"
-                        tooltip="最长为 24 位"
+                        tooltip="最长为 100 位"
                         placeholder="请输入店铺名"
-                        rules={[{ required: true, message: '请输入店铺名' }]}
+                        rules={[
+                          { required: true, message: '请输入店铺名,最长度为100个字符', max: 100 },
+                        ]}
                       />
                     </ProForm.Group>
                     <ProForm.Group>
@@ -162,9 +164,11 @@ const AddStore: React.FC = () => {
                         name={'keyword[' + language + ']'}
                         required
                         label="关键词"
-                        tooltip="最长为 24 位"
+                        tooltip="最长为 100 位"
                         placeholder="请输入关键词"
-                        rules={[{ required: true, message: '请输入关键词' }]}
+                        rules={[
+                          { required: true, message: '请输入关键词,最长度为100个字符', max: 100 },
+                        ]}
                       />
                     </ProForm.Group>
                     <ProForm.Group>
@@ -173,9 +177,11 @@ const AddStore: React.FC = () => {
                         name={'description[' + language + ']'}
                         required
                         label="简述"
-                        tooltip="最长为 24 位"
+                        tooltip="最长为 100 位"
                         placeholder="请输入简述"
-                        rules={[{ required: true, message: '请输入简述' }]}
+                        rules={[
+                          { required: true, message: '请输入简述,最长度为100个字符', max: 100 },
+                        ]}
                       />
                     </ProForm.Group>
                   </div>

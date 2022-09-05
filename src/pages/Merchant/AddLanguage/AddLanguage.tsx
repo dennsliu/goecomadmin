@@ -58,9 +58,9 @@ const AddLanguage: React.FC = () => {
           name="name"
           required
           label="语言名"
-          tooltip="最长为 24 位"
+          tooltip="最长为 45 位"
           placeholder="请输入语言名"
-          rules={[{ required: true, message: '请输入语言名' }]}
+          rules={[{ required: true, message: '请输入语言名,最长度为45个字符', max: 45 }]}
         />
       </ProForm.Group>
       <ProForm.Group>
@@ -69,9 +69,9 @@ const AddLanguage: React.FC = () => {
           name="languagecode"
           required
           label="语言码"
-          tooltip="最长为 24 位"
+          tooltip="最长为 10 位"
           placeholder="请输入语言码"
-          rules={[{ required: true, message: '请输入语言码' }]}
+          rules={[{ required: true, message: '请输入语言码,最长度为10个字符', max: 10 }]}
         />
       </ProForm.Group>
       <ProForm.Group>
@@ -80,9 +80,9 @@ const AddLanguage: React.FC = () => {
           name="directory"
           required
           label="语言目录"
-          tooltip="最长为 24 位"
+          tooltip="最长为 45 位"
           placeholder="请输入语言目录"
-          rules={[{ required: true, message: '请输入语言目录' }]}
+          rules={[{ required: true, message: '请输入语言目录,最长度为45个字符', max: 45 }]}
         />
       </ProForm.Group>
       <ProForm.Group>
@@ -91,9 +91,9 @@ const AddLanguage: React.FC = () => {
           name="image"
           required
           label="图片"
-          tooltip="最长为 24 位"
+          tooltip="最长为 64 位"
           placeholder="请输入图片"
-          rules={[{ required: true, message: '请输入图片' }]}
+          rules={[{ required: true, message: '请输入图片,最长度为64个字符', max: 64 }]}
         />
       </ProForm.Group>
       <ProForm.Group>

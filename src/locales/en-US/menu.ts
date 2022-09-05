@@ -53,6 +53,7 @@ export default {
   'menu.merchantandstore': 'Merchant and Store',
   'menu.merchantandstore.adduser': 'Add Merchant User',
   'menu.merchantandstore.users': 'Merchant Users',
+  'menu.merchantandstore.updateuser': 'Update merchant user',
   'menu.merchantandstore.list': 'Merchant List',
   'menu.merchantandstore.addmerchant': 'Add Merchant',
   'menu.merchantandstore.stores': 'Stores',
