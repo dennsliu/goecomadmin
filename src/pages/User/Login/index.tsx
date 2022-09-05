@@ -77,6 +77,9 @@ const Login: React.FC = () => {
           merchantid: result.merchantid,
           status: result.status,
           avatar: 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+          accesstoken: result.accesstoken,
+          accessexpire: result.accessexpire,
+          refreshafter: result.refreshafter,
         };
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         await setInitialState((s) => ({

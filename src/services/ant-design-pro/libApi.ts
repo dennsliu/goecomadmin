@@ -1,7 +1,7 @@
 // @ts-ignore
 /* eslint-disable */
 import { request } from '@umijs/max';
-
+const currentUser = JSON.parse(localStorage.getItem('currentUser'));
 /** 此处后端没有提供注释 POST /v1/lib/gettoken */
 export async function gettoken(body: API.GetTokenReq, options?: { [key: string]: any }) {
   return request<API.GetTokenReply>('/v1/lib/gettoken', {
@@ -20,6 +20,7 @@ export async function languagesadd(body: API.LanguagesAddReq, options?: { [key: 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -35,6 +36,7 @@ export async function languagesdelete(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -47,6 +49,7 @@ export async function languagesget(body: API.LanguagesGetReq, options?: { [key: 
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -62,6 +65,7 @@ export async function languagessearch(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -77,6 +81,7 @@ export async function languagesupdate(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -89,6 +94,7 @@ export async function merchantadd(body: API.MerchantAddReq, options?: { [key: st
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -104,6 +110,7 @@ export async function merchantdelete(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -116,6 +123,7 @@ export async function merchantget(body: API.MerchantGetReq, options?: { [key: st
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -131,6 +139,7 @@ export async function merchantsearch(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -146,6 +155,7 @@ export async function merchantupdate(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -161,6 +171,7 @@ export async function merchantuseradd(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -176,6 +187,7 @@ export async function merchantuserdelete(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -191,6 +203,7 @@ export async function merchantuserget(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -217,10 +230,12 @@ export async function merchantusersearch(
   body: API.MerchantSearchReq,
   options?: { [key: string]: any },
 ) {
+  console.log(currentUser);
   return request<API.MerchantUserSearchReply>('/v1/lib/merchant/user/search', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -236,6 +251,7 @@ export async function merchantuserupdate(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -248,6 +264,7 @@ export async function storeadd(body: API.StoreAddReq, options?: { [key: string]:
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -260,6 +277,7 @@ export async function storedelete(body: API.StoreDeleteReq, options?: { [key: st
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -272,6 +290,7 @@ export async function storeget(body: API.StoreGetReq, options?: { [key: string]:
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -284,6 +303,7 @@ export async function storesearch(body: API.StoreSearchReq, options?: { [key: st
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
@@ -296,6 +316,7 @@ export async function storeupdate(body: API.StoreUpdateReq, options?: { [key: st
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      authorization: `Bearer ${currentUser.accesstoken}`,
     },
     data: body,
     ...(options || {}),
